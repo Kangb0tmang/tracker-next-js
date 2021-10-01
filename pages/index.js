@@ -1,7 +1,8 @@
 import Layout from '../components/Layout';
 import { withApollo } from '../lib/apollo';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+// https://github.com/apollographql/apollo-client/issues/4794
+import { gql } from 'graphql-tag';
 
 const HELLO_QUERY = gql`
   query HelloQuery {
