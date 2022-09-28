@@ -1,5 +1,7 @@
 import HabitButton from './HabitButton';
 
+const colors = ['#718096', '#F56565', '#F6E05E', '#68D391', '#63B3ED'];
+
 const getLastFiveDays = () => {
   const dates = '01234'.split('').map((day) => {
     const tempDate = new Date();
@@ -10,18 +12,34 @@ const getLastFiveDays = () => {
   return dates;
 };
 
-const Habit = ({ habit }) => {
+const Habit = ({ habit, index }) => {
   const dates = getLastFiveDays();
   console.log('dates', dates);
 
   return (
     <article>
-      <h3>{habit}</h3>
-      <div>
+      <h3 style={{ borderColor: `${colors[index]}` }}>{habit}</h3>
+      <div className="buttons">
         {dates.map((date) => (
-          <HabitButton key={date.getMilliseconds()} date={date} />
+          <HabitButton key={date.getTime()} date={date} />
         ))}
       </div>
+      <style jsx>
+        {`
+          article {
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
+          }
+          h3 {
+            margin-top: 0;
+            border-bottom: solid 4px ${colors[index]};
+          }
+          .buttons {
+            display: flex;
+          }
+        `}
+      </style>
     </article>
   );
 };

@@ -10,6 +10,23 @@ const HabitButton = ({ date }) => {
       <button onClick={() => setComplete(!complete)}>
         {complete ? 'X' : 'O'}
       </button>
+      {/* Does not support nested styles */}
+      <style jsx>
+        {`
+          span {
+            display: flex;
+            flex-direction: column;
+          }
+          span + span {
+            margin-left: 10px;
+          }
+          button {
+            margin-top: 1rem;
+            border: none;
+            background-color: transparent;
+          }
+        `}
+      </style>
     </span>
   );
 };

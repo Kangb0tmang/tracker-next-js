@@ -5,7 +5,7 @@ const HabitList = ({ habits }) => {
     <section>
       <h2>My Habits</h2>
       {habits.map((habit, index) => (
-        <Habit key={index} habit={habit} />
+        <Habit key={habit} habit={habit} index={index} />
       ))}
     </section>
   );
