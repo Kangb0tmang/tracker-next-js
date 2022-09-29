@@ -1,6 +1,8 @@
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { ApolloServer, gql } from 'apollo-server-micro';
 
+import '../../lib/mongoose';
+
 const typeDefs = gql`
   type User {
     id: ID
