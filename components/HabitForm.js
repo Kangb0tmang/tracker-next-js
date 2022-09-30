@@ -13,7 +13,11 @@ const ADD_HABIT = gql`
 
 const HabitForm = () => {
   // Same in mutations
-  const [addHabit] = useMutation(ADD_HABIT);
+  const [addHabit] = useMutation(ADD_HABIT, {
+    // Refreshing the cache
+    // Same query name in HabitList.js
+    refetchQueries: ['getHabits'],
+  });
 
   return (
     <Form

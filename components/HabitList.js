@@ -17,7 +17,7 @@ const HabitList = () => {
   if (loading) return <section />;
 
   if (error) {
-    console.error('errors: ', error);
+    console.error('Habit List errors: ', error);
   }
 
   const { habits } = data;

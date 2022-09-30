@@ -1,15 +1,16 @@
+import Habits from './habits';
+
 export const habitsResolvers = {
-  // Same in .graphql
   Query: {
     async habits() {
-      // Placeholder message
-      console.log('habits');
-      return [
-        {
-          _id: 'some array',
-          name: 'Some habit',
-        },
-      ];
+      try {
+        // Gets all habits
+        const habits = await Habits.find();
+        // Return all habits in an array
+        return habits;
+      } catch (error) {
+        console.log('Error in Resolvers: ', error);
+      }
     },
   },
 };

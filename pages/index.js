@@ -1,5 +1,4 @@
 // https://github.com/apollographql/apollo-client/issues/4794
-import { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'graphql-tag';
 
@@ -16,17 +15,20 @@ const HELLO_QUERY = gql`
 
 const Home = () => {
   const { data, loading, error } = useQuery(HELLO_QUERY);
-  const [habits, setHabits] = useState(['Dishes']);
 
   if (loading) return <div />;
+
+  if (error) {
+    console.error('index errors: ', error);
+  }
 
   return (
     <Layout>
       <div className="hero">
         <h1 className="title">Level Up</h1>
         <div className="list">
-          <HabitForm setHabits={setHabits} />
-          <HabitList habits={habits} />
+          <HabitForm />
+          <HabitList />
         </div>
       </div>
 
