@@ -2,7 +2,7 @@
 
 import mongoose, { Schema } from 'mongoose';
 
-export const HabitsScheme = new Schema({
+export const HabitsSchema = new Schema({
   name: {
     type: String,
     required: true,
