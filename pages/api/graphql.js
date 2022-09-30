@@ -1,7 +1,6 @@
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { ApolloServer, gql } from 'apollo-server-micro';
-
-import '../../lib/mongoose';
+import mongoose from 'mongoose';
 
 const typeDefs = gql`
   type User {
@@ -32,18 +31,31 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-export default async function handler(req, res) {
-  await startServer;
-  await apolloServer.createHandler({
-    path: '/api/graphql',
-  })(req, res);
-}
+// Check if DB is connected
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error: '));
+db.once('open', () => {
+  console.log('Connected to Mongo');
+});
 
 export const config = {
   api: {
     bodyParser: false,
   },
 };
+
+export default async function handler(req, res) {
+  if (mongoose.connections[0].readyState !== 1) {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  }
+  await startServer;
+  await apolloServer.createHandler({
+    path: '/api/graphql',
+  })(req, res);
+}
 
 /* Example from video, was for older version */
 // Config is the same

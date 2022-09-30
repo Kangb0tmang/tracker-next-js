@@ -14,7 +14,7 @@ const getLastFiveDays = () => {
 
 const Habit = ({ habit, index }) => {
   const dates = getLastFiveDays();
-  console.log('dates', dates);
+  // console.log('dates', dates);
 
   return (
     <article>
