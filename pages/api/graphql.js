@@ -1,8 +1,13 @@
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { ApolloServer, gql } from 'apollo-server-micro';
 import mongoose from 'mongoose';
+import { mergeResolvers, mergeTypeDefs } from '@graphql-tools/merge';
 
-const typeDefs = gql`
+import { habitsResolvers } from '../../api/habits/resolvers';
+import { habitsMutations } from '../../api/habits/mutations';
+import Habits from '../../api/habits/Habits.graphql';
+
+const fakeTypeDefs = gql`
   type User {
     id: ID
   }
@@ -11,13 +16,21 @@ const typeDefs = gql`
   }
 `;
 
-const resolvers = {
+const fakeResolvers = {
   Query: {
     sayHello: () => {
       return 'Hello there';
     },
   },
 };
+
+const resolvers = mergeResolvers([
+  fakeResolvers,
+  habitsResolvers,
+  habitsMutations,
+]);
+
+const typeDefs = mergeTypeDefs([fakeTypeDefs, Habits]);
 
 // https://lyonwj.com/blog/graphql-server-next-js-neo4j-aura-vercel#using-graphql-playground-with-apollo-server-v3
 // GraphQL Playground deprecated, can enable it again as a plugin
