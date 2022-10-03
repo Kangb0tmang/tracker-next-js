@@ -8,20 +8,23 @@ const getLastFiveDays = () => {
     tempDate.setDate(tempDate.getDate() - day);
     return tempDate;
   });
-
   return dates;
 };
 
 const Habit = ({ habit, index }) => {
   const dates = getLastFiveDays();
-  // console.log('dates', dates);
 
   return (
     <article>
       <h3 style={{ borderColor: `${colors[index]}` }}>{habit.name}</h3>
       <div className="buttons">
         {dates.map((date) => (
-          <HabitButton key={date.getTime()} date={date} />
+          <HabitButton
+            key={date.getTime()}
+            date={date}
+            habitId={habit._id}
+            events={habit.events}
+          />
         ))}
       </div>
       <style jsx>

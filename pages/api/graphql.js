@@ -8,9 +8,6 @@ import { habitsMutations } from '../../api/habits/mutations';
 import Habits from '../../api/habits/Habits.graphql';
 
 const fakeTypeDefs = gql`
-  type User {
-    id: ID
-  }
   type Query {
     sayHello: String
   }

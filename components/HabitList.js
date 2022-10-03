@@ -7,6 +7,10 @@ const GET_HABITS = gql`
     habits {
       _id
       name
+      events {
+        _id
+        date
+      }
     }
   }
 `;
@@ -18,6 +22,7 @@ const HabitList = () => {
 
   if (error) {
     console.error('Habit List errors: ', error);
+    return <section />;
   }
 
   const { habits } = data;
