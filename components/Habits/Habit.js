@@ -17,7 +17,6 @@ const Habit = ({ habit, index }) => {
 
   return (
     <Box
-      as="article"
       p="20px"
       borderRadius="15px"
       boxShadow="2px 2px 15px rgba(0, 0, 0, 0.1)"

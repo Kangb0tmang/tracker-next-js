@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { Box } from '@chakra-ui/react';
+import { Grid, Box, Heading } from '@chakra-ui/react';
 
 import Habit from './Habit';
 
@@ -30,11 +30,19 @@ const HabitList = () => {
   const { habits } = data;
 
   return (
-    <Box as="section">
-      <h2>My Habits</h2>
-      {habits.map((habit, index) => (
-        <Habit key={habit._id} habit={habit} index={index} />
-      ))}
+    <Box as="section" mt="50px">
+      <Heading as="h2" mb="20px">
+        My Habits
+      </Heading>
+      <Grid
+        gap={5}
+        autoFlow="row dense"
+        templateColumns={['', '', 'repeat(2, 1fr)']}
+      >
+        {habits.map((habit, index) => (
+          <Habit key={habit._id} habit={habit} index={index} />
+        ))}
+      </Grid>
     </Box>
   );
 };

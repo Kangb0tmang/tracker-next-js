@@ -55,7 +55,14 @@ const HabitButton = ({ date, habitId, events }) => {
 
   return (
     // Temporary usage until linked to DB
-    <Flex flexDirection="column" sx={{ ...buttonContainerStyles }}>
+    <Flex
+      flexDirection="column"
+      sx={{
+        marginRight: '10px',
+        '&:last-child': { marginRight: 0 },
+        textAlign: 'center',
+      }}
+    >
       <Text as="span">
         {date.getMonth() + 1}/{date.getDate()}
       </Text>
