@@ -1,9 +1,13 @@
-import Layout from '../components/Layout';
+import { Heading } from '@chakra-ui/react';
+
+import Layout from '../components/Layout/Layout';
 
 const About = () => {
   return (
     <Layout>
-      <h1>About</h1>
+      <Heading as="h1" textAlign="center">
+        About
+      </Heading>
     </Layout>
   );
 };

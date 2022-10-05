@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { Box } from '@chakra-ui/react';
+
 import Habit from './Habit';
 
 const GET_HABITS = gql`
@@ -18,22 +20,22 @@ const GET_HABITS = gql`
 const HabitList = () => {
   const { data, loading, error } = useQuery(GET_HABITS);
 
-  if (loading) return <section />;
+  if (loading) return <Box />;
 
   if (error) {
     console.error('Habit List errors: ', error);
-    return <section />;
+    return <Box />;
   }
 
   const { habits } = data;
 
   return (
-    <section>
+    <Box as="section">
       <h2>My Habits</h2>
       {habits.map((habit, index) => (
         <Habit key={habit._id} habit={habit} index={index} />
       ))}
-    </section>
+    </Box>
   );
 };
 

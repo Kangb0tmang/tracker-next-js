@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { Flex, Button, Text } from '@chakra-ui/react';
 
 const ADD_EVENT = gql`
   mutation addEvent($date: Date, $habitId: ID) {
@@ -13,6 +14,19 @@ const ADD_EVENT = gql`
     }
   }
 `;
+
+const buttonStyles = {
+  border: 'none',
+  marginTop: '0.5rem',
+};
+
+const buttonContainerStyles = {
+  marginRight: '10px',
+  '&:last-child': {
+    marginRight: 0,
+  },
+  textAlign: 'center',
+};
 
 const REMOVE_EVENT = gql`
   mutation removeEvent($eventId: ID, $habitId: ID) {
@@ -41,10 +55,12 @@ const HabitButton = ({ date, habitId, events }) => {
 
   return (
     // Temporary usage until linked to DB
-    <span>
-      {date.getMonth() + 1}/{date.getDate()}
+    <Flex flexDirection="column" sx={{ ...buttonContainerStyles }}>
+      <Text as="span">
+        {date.getMonth() + 1}/{date.getDate()}
+      </Text>
       {foundDate ? (
-        <button
+        <Button
           onClick={() =>
             removeEvent({
               variables: {
@@ -53,11 +69,12 @@ const HabitButton = ({ date, habitId, events }) => {
               },
             })
           }
+          sx={{ ...buttonStyles }}
         >
           X
-        </button>
+        </Button>
       ) : (
-        <button
+        <Button
           onClick={() =>
             addEvent({
               variables: {
@@ -66,28 +83,12 @@ const HabitButton = ({ date, habitId, events }) => {
               },
             })
           }
+          sx={{ ...buttonStyles }}
         >
           O
-        </button>
+        </Button>
       )}
-      {/* Does not support nested styles */}
-      <style jsx>
-        {`
-          span {
-            display: flex;
-            flex-direction: column;
-          }
-          span + span {
-            margin-left: 10px;
-          }
-          button {
-            margin-top: 1rem;
-            border: none;
-            background-color: transparent;
-          }
-        `}
-      </style>
-    </span>
+    </Flex>
   );
 };
 
